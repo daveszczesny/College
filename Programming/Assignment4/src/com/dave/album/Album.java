@@ -1,3 +1,9 @@
+/**
+ * @Author: Dawid Szczesny
+ * @ID: 21300293
+ */
+
+
 package com.dave.album;
 
 import java.util.ArrayList;
@@ -21,79 +27,14 @@ import java.lang.StringBuilder;
  */
 public class Album {
 
+    // Dimension size for images
     private static final Dimension IMAGE_SIZE = new Dimension(200, 200);
 
+    // Attributes
     private List<Song> songsList = new ArrayList<>();
     private String artist;
     private String albumName;
     private ImageIcon albumImage;
-
-    public Album() {
-
-    }
-
-    public Album(String artist) {
-        setArtist(artist);
-    }
-
-    public Album(String artist, String albumName) {
-        setArtist(artist);
-        setAlbumName(albumName);
-    }
-
-    public Album(String artist, String albumName, ImageIcon albumIcon) {
-        setArtist(artist);
-        setAlbumName(albumName);
-        setAlbumImage(albumIcon);
-    }
-
-    public static List<Album> LoadAlbumsFromFile(File file) throws IOException {
-        List<Album> albums = new ArrayList<>();
-
-        // If file does not exist
-        if (!file.exists()) {
-            throw new FileNotFoundException();
-        }
-
-        // music library exists, read file
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line = "";
-            while ((line = br.readLine()) != null) {
-                // split file by csv splitter
-                String[] fileData = line.split(",");
-
-                // create new instance of album and populate
-                Album album = new Album();
-                album.setArtist(fileData[0]); // artist name
-                album.setAlbumName(fileData[1]); // album name
-                ImageIcon image = retrieveSizedImageIcon(new File(fileData[2].replaceAll(" ", ""))); // album cover image
-                album.setAlbumImage(image);
-                album.setSongsList(Song.retrieveSongsFromFile(new File(fileData[3].replaceAll(" ", "")))); // Songs list
-                albums.add(album); // add album to album list
-            }
-        }
-
-        return albums;
-    }
-
-    /**
-     * Method to take file for album image and create a scaled image icon for it
-     * 
-     * @param file
-     * @return ImageIcon
-     * @throws IOException
-     */
-    public static ImageIcon retrieveSizedImageIcon(File file) throws IOException {
-        if (!file.exists()) {
-            System.err.println("Can't find file: " + file.getAbsolutePath());
-            throw new FileNotFoundException("Image icon file not found!");
-        }
-
-        BufferedImage bi = ImageIO.read(file);
-        Image dimg = bi.getScaledInstance((int) IMAGE_SIZE.getWidth(), (int) IMAGE_SIZE.getHeight(),
-                Image.SCALE_SMOOTH);
-        return new ImageIcon(dimg);
-    }
 
     /**
      * Set artist for album
@@ -131,6 +72,10 @@ public class Album {
         this.albumName = albumName;
     }
 
+    /**
+     * Method to retrieve album name
+     * @return
+     */
     public String getAlbumName() {
         return this.albumName;
     }
@@ -149,6 +94,10 @@ public class Album {
         this.albumImage = albumImage;
     }
 
+    /**
+     * Method to retrieve image for album
+     * @return
+     */
     public ImageIcon getAlbumImage() {
         return this.albumImage;
     }
@@ -191,6 +140,9 @@ public class Album {
         return this.songsList;
     }
 
+    /**
+     * @return A string containing the album name, artist, and a list of songs.
+    */
     @Override
     public String toString() {
         // Concatenates all the songs in the album to print
@@ -202,6 +154,63 @@ public class Album {
         sb.append("\n\n");
 
         return sb.toString();
+    }
+
+    /**
+     * Method to read and create all albums from file
+     * Each album then retrieves all its songs
+     * 
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    public static List<Album> LoadAlbumsFromFile(File file) throws IOException {
+        List<Album> albums = new ArrayList<>();
+
+        // If file does not exist
+        if (!file.exists()) {
+            throw new FileNotFoundException();
+        } 
+
+        // music library exists, read file
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                // split file by csv splitter
+                String[] fileData = line.split(",");
+
+                // create new instance of album and populate
+                Album album = new Album();
+                album.setArtist(fileData[0]); // artist name
+                album.setAlbumName(fileData[1]); // album name
+                // album cover image
+                ImageIcon image = retrieveSizedImageIcon(new File(fileData[2].replaceAll(" ", "")));
+                album.setAlbumImage(image);
+                album.setSongsList(Song.retrieveSongsFromFile(new File(fileData[3].replaceAll(" ", "")))); // Songs list
+                albums.add(album); // add album to album list
+            }
+        }
+
+        return albums;
+    }
+
+    /**
+     * Method to take file for album image and create a scaled image icon for it
+     * 
+     * @param file
+     * @return ImageIcon
+     * @throws IOException
+     */
+    public static ImageIcon retrieveSizedImageIcon(File file) throws IOException {
+        if (!file.exists()) {
+            System.err.println("Can't find file: " + file.getAbsolutePath());
+            throw new FileNotFoundException("Image icon file not found!");
+        }
+
+        BufferedImage bi = ImageIO.read(file);
+        Image dimg = bi.getScaledInstance((int) IMAGE_SIZE.getWidth(), (int) IMAGE_SIZE.getHeight(),
+                Image.SCALE_SMOOTH);
+        return new ImageIcon(dimg);
     }
 
 }
