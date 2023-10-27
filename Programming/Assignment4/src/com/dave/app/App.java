@@ -21,6 +21,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -83,12 +84,12 @@ public class App extends JFrame {
             JButton button = new JButton("", album.getAlbumImage());
             button.setBackground(Color.white);
 
-            // Text field for album name and artist
-            JTextField tfield = new JTextField(album.getAlbumName() +" by "+ album.getArtist());
-            tfield.setFont(new Font("arial", 0, 18)); // set font size to be bigger
-            JPanel textPanel = new JPanel(new BorderLayout());
-            textPanel.add(tfield);
-            albumPanel.add(textPanel, BorderLayout.NORTH); // add to top of panel
+            // Text label for album name and artist
+            JLabel label = new JLabel(album.getAlbumName() + " by " + album.getArtist());
+            label.setFont(new Font("ariial", 0, 18));
+            JPanel labelPanel = new JPanel(new BorderLayout());
+            labelPanel.add(label);
+            albumPanel.add(labelPanel, BorderLayout.NORTH); // add to top of panel
             
             // Create the table for each album
             JTable table = createTable(album);
