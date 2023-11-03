@@ -1,3 +1,6 @@
 [submodule "HCI/App/HCI-Project"]
 	path = HCI/App/HCI-Project
 	url = C:/Program Files/Git/HCI/APP/HCI-Project/HCI-Project.git
+[submodule "HCI-Project"]
+	path = HCI-Project
+	url = https://github.com/daveszczesny/HCI-Project.git
