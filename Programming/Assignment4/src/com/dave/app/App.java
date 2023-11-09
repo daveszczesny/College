@@ -3,7 +3,6 @@
  * @ID: 21300293
  */
 
-
 package com.dave.app;
 
 import java.awt.BorderLayout;
@@ -26,7 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-    
+
 import com.dave.album.Album;
 import com.dave.album.Song;
 
@@ -40,7 +39,7 @@ public class App extends JFrame {
     private final Dimension WINDOW_SIZE = new Dimension(800, 800);
 
     // Album list used to display for music library
-    private List<Album> alubmList = new ArrayList<>();
+    private List<Album> albumList = new ArrayList<>();
     private JPanel buttonPanel = null;
 
     public App() {
@@ -58,7 +57,7 @@ public class App extends JFrame {
         String path = "Resources/music_library.csv";
         try {
             // retrieve albums from file
-            alubmList = Album.LoadAlbumsFromFile(new File(path));
+            albumList = Album.LoadAlbumsFromFile(new File(path));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -67,19 +66,20 @@ public class App extends JFrame {
     /**
      * Method Sets up the albums in music library
      * Each album is loaded as a button
-     * Each button has an OnClick event, so that it unloads the previous panel from the
-     *  display and loads the albums song panel to screen
+     * Each button has an OnClick event, so that it unloads the previous panel from
+     * the
+     * display and loads the albums song panel to screen
      * Method takes a reference to the main panel container
      * 
      * @param panelContainer
      */
     private void setupAlbumButtons(Container panelContainer) {
         // Loops through each Album
-        for (Album album : alubmList) {
+        for (Album album : albumList) {
 
             // Create an album panel for each album
             JPanel albumPanel = new JPanel(new BorderLayout());
-            
+
             // Create a button for each album panel and set bg color to white
             JButton button = new JButton("", album.getAlbumImage());
             button.setBackground(Color.white);
@@ -90,13 +90,14 @@ public class App extends JFrame {
             JPanel labelPanel = new JPanel(new BorderLayout());
             labelPanel.add(label);
             albumPanel.add(labelPanel, BorderLayout.NORTH); // add to top of panel
-            
+
             // Create the table for each album
             JTable table = createTable(album);
             table.setEnabled(false); // make non-editible
 
             // Set the size of the table, and turn of grids
-            table.setPreferredScrollableViewportSize(new Dimension((int)WINDOW_SIZE.getWidth()-25, (int)WINDOW_SIZE.getHeight()-100));
+            table.setPreferredScrollableViewportSize(
+                    new Dimension((int) WINDOW_SIZE.getWidth() - 25, (int) WINDOW_SIZE.getHeight() - 100));
             table.setFillsViewportHeight(true);
             table.setShowGrid(false);
 
@@ -133,13 +134,14 @@ public class App extends JFrame {
 
             });
 
-            /* 
+            /*
              * Back button onclick event
              * When back button is clicked
              * Main container will remove previous panel
-             * and it will add the default album button panel that was originally loaded at the start
+             * and it will add the default album button panel that was originally loaded at
+             * the start
              * it will then repaint to show the user
-            */
+             */
             backButton.addActionListener(new ActionListener() {
 
                 @Override
@@ -159,26 +161,27 @@ public class App extends JFrame {
     }
 
     /**
-     * Method to create table, takes in album and retrieves from it the index of song, song name and length
+     * Method to create table, takes in album and retrieves from it the index of
+     * song, song name and length
+     * 
      * @param album
      * @return JTable
      */
-    private JTable createTable(Album album)
-    {
+    private JTable createTable(Album album) {
         String[] colNames = {
-                    "No.", "Track name", "Length"
-            };
+                "No.", "Track name", "Length"
+        };
 
-            List<Song> songs = album.getAlbumSongs();
+        List<Song> songs = album.getAlbumSongs();
 
-            String[][] data = new String[songs.size()][3];
-            for (int i = 0; i < songs.size(); i++) {
-                data[i][0] = String.valueOf(songs.get(i).getIndex());
-                data[i][1] = songs.get(i).getName();
-                data[i][2] = songs.get(i).getLength();
-            }
+        String[][] data = new String[songs.size()][3];
+        for (int i = 0; i < songs.size(); i++) {
+            data[i][0] = String.valueOf(songs.get(i).getIndex());
+            data[i][1] = songs.get(i).getName();
+            data[i][2] = songs.get(i).getLength();
+        }
 
-            return new JTable(data, colNames);
+        return new JTable(data, colNames);
     }
 
     /**
@@ -200,7 +203,7 @@ public class App extends JFrame {
 
         // Set basic window attributes
         setTitle("Music Library");
-        setSize((int)WINDOW_SIZE.getWidth(), (int)WINDOW_SIZE.getHeight());
+        setSize((int) WINDOW_SIZE.getWidth(), (int) WINDOW_SIZE.getHeight());
         setVisible(true);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
