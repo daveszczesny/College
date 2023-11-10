@@ -18,9 +18,9 @@ public class App {
         try {
 
             // Creates 3 accounts with 100,000 EUR
-            Account account1 = new Account(12356, Money.parse("EUR" + 100_000.0f));
-            Account account2 = new Account(12378, Money.parse("EUR" + 100_000.0f));
-            Account account3 = new Account(12321, Money.parse("EUR" + 100_000.0f));
+            Account account1 = new Account(12347, Money.parse("EUR" + 100_000.0f));
+            Account account2 = new Account(25348, Money.parse("EUR" + 50_050.0f));
+            Account account3 = new Account(11284, Money.parse("EUR" + 90_500.0f));
 
             // Adds accounts to bank
             bank.addAccount(account1);
@@ -55,7 +55,7 @@ public class App {
                     // After RandomTransactionGenerator thread completes,
                     // Wait for TransactionProcessor to finish (Given limited time incase of
                     // deadlock)
-                    if (transactionProcessorThreadPool.awaitTermination(10, TimeUnit.SECONDS)) {
+                    if (transactionProcessorThreadPool.awaitTermination(30, TimeUnit.SECONDS)) {
                         // Print out account summary after threads complete
                         System.out.println(bank.printAllAccountDetails());
                     }

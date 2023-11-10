@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-
 /*
  * Random Transaction Generator Thread class
  * Randomly generates transactions for the accounts in the bank's accounts collection
@@ -22,7 +21,9 @@ public class RandomTransactionGenerator implements Runnable {
     private Random random = new Random();
 
     /**
-     * RandomTransactionGenerator constructor, initializes bank instance, and retrieves account numbers from bank.
+     * RandomTransactionGenerator constructor, initializes bank instance, and
+     * retrieves account numbers from bank.
+     * 
      * @param bank
      */
     public RandomTransactionGenerator(Bank bank) {
@@ -57,11 +58,7 @@ public class RandomTransactionGenerator implements Runnable {
      */
     private void generateRandomTransaction() throws InterruptedException {
 
-        if (accountNumbers.size() > 2) {
-
-            Collections.shuffle(accountNumbers);
-        }
-
+        Collections.shuffle(accountNumbers);
         // Get first two accounts from list
         int accountNumber1 = accountNumbers.get(0);
         int accountNumber2 = accountNumbers.get(1);
@@ -69,10 +66,11 @@ public class RandomTransactionGenerator implements Runnable {
         // Gets random floating point number (0 -> 10,000) and rounds it to 2 decimal
         // points using
         // Math.round(x * 100.0f) / 100.0f
-        float amountToTransact = Math.round(random.nextFloat(10000) * 100.0f) / 100.0f;
+        float amountToTransact = Math.round(random.nextFloat(10_000.0f) * 100.0f) / 100.0f;
 
         // Create two transactions, one to withdraw, and the other to deposit
         Transaction transaction1 = new Transaction(accountNumber1, amountToTransact);
+        // converting amount to transact to negative number to represent a withdrawal
         Transaction transaction2 = new Transaction(accountNumber2, -amountToTransact);
 
         // Submit transactions to bank's transaction queue
@@ -96,7 +94,7 @@ public class RandomTransactionGenerator implements Runnable {
      * @throws InterruptedException
      */
     private void sleepRandomTime() throws InterruptedException {
-        Thread.sleep(random.nextInt(1000));
+        Thread.sleep(random.nextInt(1000)); // in miliseconds
     }
 
 }

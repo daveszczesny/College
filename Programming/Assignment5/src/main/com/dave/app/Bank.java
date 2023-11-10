@@ -140,10 +140,10 @@ public class Bank {
 
     /**
      * Method to retrieve a set of all account numbers
-     * @return null : set of the account numbers
+     * @return set of the account numbers
      */
     public Set<Integer> retrieveAccountNumbers(){
-        return accounts.isEmpty() ? null : accounts.keySet();
+        return accounts.keySet();
     }   
 
 }
