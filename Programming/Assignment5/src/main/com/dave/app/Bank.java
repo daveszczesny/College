@@ -10,7 +10,6 @@
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -59,6 +58,7 @@ public class Bank {
 
         // Create account instance
         Account account = accounts.get(accNumber);
+                
         // check if account is found
         if(account == null){
             throw new AccountNotFoundException("The accound number provided yields no account!");
@@ -82,7 +82,6 @@ public class Bank {
 
         // Add to queue
         transactionQueue.add(transaction);
-
     }
 
     /**
