@@ -90,13 +90,13 @@ public class Bank {
      * @return Transaction
      * @throws NoSuchElementException
      */
-    public Transaction retrieveNextTransaction(){
+    public synchronized Transaction retrieveNextTransaction(){
         // Checks if the transaction queue is empty
         if(transactionQueue.isEmpty()){
             return null;
         }
 
-        // assign transaction to the first element in the queue and remove it from the queue
+        // assign transaction to the first element in the queue
         Transaction transaction = transactionQueue.peek();
 
         // If the transaction is the 'Poison Pill', return transaction
@@ -104,7 +104,7 @@ public class Bank {
             return transaction;
         }
 
-        // remove head of transaction queue and the return
+        // remove head of transaction queue and then return
         transactionQueue.remove();
         return transaction;    
     }
