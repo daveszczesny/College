@@ -19,7 +19,7 @@ public class Bank {
     // Attributes
     // accounts hashmap holds all account <Account Number, Account Object>
     private Map<Integer, Account> accounts = new HashMap<>();
-    // Linked Blocking
+    // Linked Blocking Queue for transaction
     private LinkedBlockingQueue<Transaction> transactionQueue = new LinkedBlockingQueue<>();
 
     /**
@@ -36,7 +36,7 @@ public class Bank {
 
         // if account is already in bank
         if(accounts.containsKey(account.getAccountNumber())){
-            throw new DuplicateAccountException("Acount already in bank!");
+            throw new DuplicateAccountException("Account already exists in bank!");
         }
         
         // add acount to banks collection
@@ -86,9 +86,9 @@ public class Bank {
     }
 
     /**
-     * Method to retrieve the next transaction from the queue
+     * Method to retrieve the next transaction from the queue,
+     * Synchronized to prevent two threads reaching for the same transaction
      * @return Transaction
-     * @throws NoSuchElementException
      */
     public synchronized Transaction retrieveNextTransaction(){
         // Checks if the transaction queue is empty
@@ -96,25 +96,17 @@ public class Bank {
             return null;
         }
 
-        // assign transaction to the first element in the queue
-        Transaction transaction = transactionQueue.peek();
-
-        // If the transaction is the 'Poison Pill', return transaction
-        if(transaction == Transaction.POISON_PILL){
-            return transaction;
-        }
-
-        // remove head of transaction queue and then return
-        transactionQueue.remove();
-        return transaction;    
+        // Checks if the transaction at the head of queue is the 'Poison Pill',
+        // If it is return it,
+        // else remove the head while returning it        
+        return transactionQueue.peek() == Transaction.POISON_PILL ? 
+                    transactionQueue.peek() : transactionQueue.remove();
     }
-
-
 
     /**
      * Method to print out the account details given an account number
-     * @param accNumvber
-     * @return
+     * @param accNumber
+     * @return Account Summary
      * @throws AccountNotFoundException
      */
     public String printAccountDetails(int accNumber) throws AccountNotFoundException{

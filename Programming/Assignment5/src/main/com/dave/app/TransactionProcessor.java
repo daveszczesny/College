@@ -6,7 +6,6 @@
 import java.util.Random;
 import org.joda.money.Money;
 
-
 /*
  * TransactionProcessor Thread class
  * Takes the transactions from the bank's transaction queue
@@ -26,7 +25,9 @@ public class TransactionProcessor implements Runnable {
 
     /**
      * TransactionProcessor constructor
-     *  initializes attributes and takes note of current time as time elapsed since last transaction
+     * initializes attributes and takes note of current time as time elapsed since
+     * last transaction
+     * 
      * @param transactionName
      * @param bank
      */
@@ -44,9 +45,15 @@ public class TransactionProcessor implements Runnable {
         // Take reference of first transaction from bank
         Transaction transaction = bank.retrieveNextTransaction();
 
-        // While the transaction is not the 'Poison Pill' or time elapsed hasn't hit its limit
-        while (transaction != Transaction.POISON_PILL
-                || timeElapsedLastTransaction < TIME_ELAPSED_LIMIT_FROM_LAST_TRANSACTION) {
+        // While the transaction is not the 'Poison Pill' or time elapsed hasn't hit its
+        // limit
+        while ((System.currentTimeMillis()
+                - timeElapsedLastTransaction) < TIME_ELAPSED_LIMIT_FROM_LAST_TRANSACTION) {
+            
+            // If transaction is the 'Poison Pill', exit out of loop, and let thread complete
+            if (transaction == Transaction.POISON_PILL) {
+                break;
+            }
 
             // If the transaction isn't null, proceed to processing the current transaction
             if (transaction != null) {

@@ -1,4 +1,9 @@
 
+/*
+ * @Author: Dawid Szczesny
+ * @ID: 21300293
+ */
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -50,7 +55,7 @@ public class Account implements Serializable {
 	 */
 	public void makeDeposit(Money amount) {
 		if (amount.isGreaterThan(Money.of(CurrencyUnit.EUR, 0))) {
-			balance = balance.plus(amount); // Need to update balance after plusing amount
+			balance = balance.plus(amount); // Need to update balance after adding amount
 		}
 	}
 

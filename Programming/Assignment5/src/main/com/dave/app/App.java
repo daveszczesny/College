@@ -1,22 +1,26 @@
 
+/*
+ * @Author: Dawid Szczesny
+ * @ID: 21300293
+ */
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
 import org.joda.money.Money;
 
 public class App {
     public static void main(String[] args) {
 
-        final int DURATION_TO_RUN_RANDOM_TRANSACTION_GENERATOR = 10;
+        final int DURATION_TO_RUN_RANDOM_TRANSACTION_GENERATOR = 10; // in seconds
         Bank bank = new Bank();
 
         try {
 
             // Creates 3 accounts with 100,000 EUR
-            Account account1 = new Account(12356, Money.parse("EUR" + 100000.0f));
-            Account account2 = new Account(12378, Money.parse("EUR" + 100000.0f));
-            Account account3 = new Account(12321, Money.parse("EUR" + 100000.0f));
+            Account account1 = new Account(12356, Money.parse("EUR" + 100_000.0f));
+            Account account2 = new Account(12378, Money.parse("EUR" + 100_000.0f));
+            Account account3 = new Account(12321, Money.parse("EUR" + 100_000.0f));
 
             // Adds accounts to bank
             bank.addAccount(account1);
@@ -30,7 +34,7 @@ public class App {
 
             // Creates two ExecutorServices, 1 for transaction processors, 1 for random
             // transaction generator
-            ExecutorService transactionProcessorThreadPool = Executors.newFixedThreadPool(2);
+            ExecutorService transactionProcessorThreadPool = Executors.newFixedThreadPool(3);
             ExecutorService randomTransactionGeneratorThreadPool = Executors.newFixedThreadPool(1);
 
             // Add Threads to ExecutorService
@@ -59,7 +63,7 @@ public class App {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
- 
+
         } catch (NegativeBalanceException | DuplicateAccountException e) {
             e.printStackTrace();
         }
