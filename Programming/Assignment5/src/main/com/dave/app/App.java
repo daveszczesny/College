@@ -34,7 +34,7 @@ public class App {
 
             // Creates two ExecutorServices, 1 for transaction processors, 1 for random
             // transaction generator
-            ExecutorService transactionProcessorThreadPool = Executors.newFixedThreadPool(3);
+            ExecutorService transactionProcessorThreadPool = Executors.newFixedThreadPool(2);
             ExecutorService randomTransactionGeneratorThreadPool = Executors.newFixedThreadPool(1);
 
             // Add Threads to ExecutorService
