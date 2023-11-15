@@ -1,0 +1,74 @@
+body {
+    background-color: #1a1a1a;
+    color: #ff6666;
+    font-family: Arial, sans-serif;
+}
+
+#form-container {
+    margin: 50px auto;
+    width: 60%;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.form-params {
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.form-params select {
+    margin-left: 2vh;
+}
+
+label,
+input,
+select {
+    margin-bottom: 10px;
+    color: #ffcc00;
+}
+
+.join-button {
+    width: 200px;
+}
+
+.join-button input {
+    width: 100%;
+}
+
+input[type="text"],
+input[type="button"],
+select {
+    padding: 5px;
+    border: 1px solid #333333;
+    background-color: #333333;
+    color: #ffcc00;
+}
+
+input[type="button"] {
+    cursor: pointer;
+}
+
+
+textarea {
+    width: 400px;
+    height: 500px;
+    resize: none;
+    color: #ff6666;
+    background-color: #333333;
+}
+
+.usernameSpan {
+    color: #990000;
+}
+
+h1{
+    color: #990000;
+}

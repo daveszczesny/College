@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui">
+<h:head>
+  <title>Facelet Title</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    .form-container {
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .fui-header {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    p\:outputLabel {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    input[type="hidden"] {
+      display: none;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    .button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+
+    p\:link {
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    p\:link:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+</h:head>
+<h:body>
+  <f:facet name="header">
+    Delete Todo Item
+  </f:facet>
+
+  <h:form class="form-container">
+    <p:outputLabel value="Are you sure you want to delete todo item[ #{TodoBean.category} #{TodoBean.description} ]" />
+
+    <input type="hidden" name="todoId" value='#{param.todoId}' />
+    <div class="buttons">
+      <h:commandButton class="button" value="Yes" action="#{TodoBean.delete}" />
+      <p:link value="No" outcome="index" />
+    </div>
+  </h:form>
+
+</h:body>
+
+</html>

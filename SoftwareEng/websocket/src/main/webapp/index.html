@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chat Rooms</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="websocket.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="form-container">
+        
+        <form id="formForum">
+            <h1>Choose Forum</h1>
+            <div class="form-params">
+                <input type="text" id="username" placeholder="Username" />
+
+                <select id="topic">
+                    <option value="politics">Politics</option>
+                    <option value="technology">Technology</option>
+                    <option value="sport">Sport</option>
+                    <option value="music">Music</option>
+                    <option value="films">Films</option>
+                </select>
+
+            </div>
+            <div class="join-button">
+                <input type="button" value="join" onclick="formSubmit()" />
+            </div>
+
+        </form>
+    </div>
+
+
+    <div id="content">
+
+    </div>
+</body>
+
+</html>

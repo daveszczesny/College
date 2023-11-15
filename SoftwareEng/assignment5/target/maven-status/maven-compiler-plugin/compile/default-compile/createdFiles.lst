@@ -1,0 +1,5 @@
+bean\TodoListBean.class
+session\AbstractFacade.class
+session\TodoFacade.class
+entity\Todo.class
+bean\TodoBean.class

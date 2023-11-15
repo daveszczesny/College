@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui">
+
+<head>
+  <title>Updating Todo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-container {
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 300px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .category-container,
+    .desc-container,
+    .priority-container {
+      margin-bottom: 15px;
+    }
+
+    .label {
+      display: block;
+      font-size: 16px;
+      text-align: left;
+      margin-bottom: 5px;
+    }
+
+    .input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .todo-priority {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+    }
+
+    .button-container {
+      margin-top: 20px;
+    }
+
+    h\:commandButton {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    h\:commandButton:hover {
+      background-color: #0056b3;
+    }
+  </style>
+
+</head>
+
+<body>
+
+
+
+  <h:form class="form-container">
+    <h1>Update Todo Item</h1>
+
+    <div class="category-container">
+      <div class='label'>
+        <h:outputLabel for="todo-category" value="Category" />
+      </div>
+      <h:inputText class="input" id="todo-category" value="#{TodoBean.category}" />
+    </div>
+    <div class="desc-container">
+      <h:outputLabel class="label" for="todo-description" value="Description" />
+      <h:inputText class="input" id="todo-description" value="#{TodoBean.description}" />
+    </div>
+    <div class="priority-container">
+      <h:outputLabel class="label" for="todo-priority" value="Priority" />
+      <p:selectOneRadio class="todo-priority" value="#{TodoBean.priority}">
+        <f:selectItem itemLabel="Low" itemValue="1" />
+        <f:selectItem itemLabel="Medium" itemValue="2" />
+        <f:selectItem itemLabel="High" itemValue="3" />
+      </p:selectOneRadio>
+    </div>
+
+    <input type="hidden" name="todoId" value='#{param.todoId}' />
+    <div class="button-container">
+      <h:commandButton value="Update" action="#{TodoBean.update}" />
+    </div>
+  </h:form>
+
+</body>
+
+</html>

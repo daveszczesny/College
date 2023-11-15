@@ -1,0 +1,93 @@
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<%-- Set language based on user's choice --%>
+<c:if test="${!empty language}">
+    <fmt:setLocale value="${language}" scope="session" />
+</c:if>
+
+
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/ejbAssignment/css/booklist.css">
+        <link rel="shortcut icon" href="/ejbAssignment/img/favicon.ico">
+        <title><fmt:message key='title' /></title>
+    </head>
+
+    <body>
+        <div id="main">
+            <div id="widgetBar">
+                <div id="headerWidget">
+                      <%-- language selection widget --%>
+                      <c:choose>
+                        <%-- When user hasn't explicitly set language,
+                             render toggle according to browser's preferred locale --%>
+                        <c:when test="${empty sessionScope['jakarta.servlet.jsp.jstl.fmt.locale.session']}">
+                          <c:choose>
+                            <c:when test="${pageContext.request.locale.language ne 'fr'}">
+                              english
+                            </c:when>
+                            <c:otherwise>
+                              <c:url var="url" value="chooseLanguage">
+                                <c:param name="language" value="en"/>
+                              </c:url>
+                              <div class="bubble"><a href="${url}">english</a></div>
+                            </c:otherwise>
+                          </c:choose> |
+
+                          <c:choose>
+                            <c:when test="${pageContext.request.locale.language eq 'fr'}">
+                              francais
+                            </c:when>
+                            <c:otherwise>
+                              <c:url var="url" value="chooseLanguage">
+                                <c:param name="language" value="fr"/>
+                              </c:url>
+                              <div class="bubble"><a href="${url}">francais</a></div>
+                            </c:otherwise>
+                          </c:choose>
+                        </c:when>
+
+                      <%-- Otherwise, render widget according to the set locale --%>
+                        <c:otherwise>
+                          <c:choose>
+                            <c:when test="${sessionScope['jakarta.servlet.jsp.jstl.fmt.locale.session'] ne 'fr'}">
+                              english
+                            </c:when>
+                            <c:otherwise>
+                              <c:url var="url" value="chooseLanguage">
+                                <c:param name="language" value="en"/>
+                              </c:url>
+                              <div class="bubble"><a href="${url}">english</a></div>
+                            </c:otherwise>
+                          </c:choose> |
+
+                          <c:choose>
+                            <c:when test="${sessionScope['jakarta.servlet.jsp.jstl.fmt.locale.session'] eq 'fr'}">
+                              francais
+                            </c:when>
+                            <c:otherwise>
+                              <c:url var="url" value="chooseLanguage">
+                                <c:param name="language" value="fr"/>
+                              </c:url>
+                              <div class="bubble"><a href="${url}">francais</a></div>
+                            </c:otherwise>
+                          </c:choose>
+                        </c:otherwise>
+                      </c:choose>
+                </div>
+            </div>
+            <div id="header">
+
+                <a href="<c:url value='/'/>">
+                    <img src="/ejbAssignment/img/logo.png" id="logo" alt="no logo">
+                </a>
+
+                <img  src="/ejbAssignment/img/logoText.png" id="logoText" alt="no logo text">
+            </div>

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Facelet Title</title>
+</h:head>
+<h:body>
+
+    <p:link value="Create new Todo item" outcome="add" />
+
+    <p:dataTable var="todo" value="#{TodoListBean.todoList}" size="small" stripedRows="true">
+        <p:column headerText="Category">
+            <h:outputText value="#{todo.category}" />
+        </p:column>
+        <p:column headerText="Description">
+            <h:outputText value="#{todo.description}" />
+        </p:column>
+        <p:column headerText="Priority">
+            <h:outputText value="#{todo.priority}" />
+        </p:column>
+
+        <p:column headerText="">
+            <p:link value="Edit" outcome="edit">
+                <f:param name="todoId" value="#{todo.todoId}" />
+            </p:link>
+        </p:column>
+
+        <p:column headerText="">
+            <p:link value="Delete" outcome="delete">
+                <f:param name="todoId" value="#{todo.todoId}" />
+            </p:link>
+        </p:column>
+    </p:dataTable>
+
+
+</h:body>
+
+</html>

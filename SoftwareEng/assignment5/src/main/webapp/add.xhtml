@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui">
+<h:head>
+  <title>Facelet Title</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-container {
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .fui-header {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .category-container,
+    .desc-container,
+    .priority-container {
+      margin-bottom: 15px;
+    }
+
+    h\:outputLabel {
+      display: block;
+      font-size: 16px;
+      text-align: left;
+      margin-bottom: 5px;
+    }
+
+    .input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .button-container {
+      margin-top: 20px;
+    }
+
+    .button-container h\:commandButton {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .button-container h\:commandButton:hover {
+      background-color: #0056b3;
+    }
+
+    .back-button {
+      margin-top: 20px;
+    }
+
+    p\:link {
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    p\:link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</h:head>
+<h:body>
+
+  <f:facet name="header">
+    Add new Todo Item
+  </f:facet>
+
+
+  <h:form class="form-container">
+    <h1>Add new Todo Item</h1>
+
+    <div class="category-container">
+      <h:outputLabel for="todo-category" value="Category" />
+      <h:inputText class="input" id="todo-category" value="#{TodoBean.category}" />
+    </div>
+    <div class="desc-container">
+      <h:outputLabel for="todo-description" value="Description" />
+      <h:inputText class="input" id="todo-description" value="#{TodoBean.description}" />
+    </div>
+    <div class="priority-container">
+      <h:outputLabel for="todo-priority" value="Priority" />
+      <p:selectOneRadio class="todo-priority" value="#{TodoBean.priority}">
+        <f:selectItem itemLabel="Low" itemValue="1" />
+        <f:selectItem itemLabel="Medium" itemValue="2" />
+        <f:selectItem itemLabel="High" itemValue="3" />
+      </p:selectOneRadio>
+    </div>
+
+    <div class="button-container">
+      <h:commandButton value="Create" action="#{TodoBean.add}" />
+    </div>
+  </h:form>
+
+
+
+  <div class="back-button">
+    <p:link value="Go back" outcome="index" />
+  </div>
+
+</h:body>
+
+</html>
